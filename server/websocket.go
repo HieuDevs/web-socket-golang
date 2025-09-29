@@ -33,12 +33,11 @@ func (m *Manager) ServeWS(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Printf("WebSocket connection established - User: %s, Room: %s, Addr: %s\n", userId, room, conn.RemoteAddr())
 
+	go m.registerClient(client)
 	if !m.started {
 		go m.Start()
 		m.started = true
 	}
-
 	go m.readMessages(client)
 	go m.heartbeat(client)
-	m.registerClient(client)
 }

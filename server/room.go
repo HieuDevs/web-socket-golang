@@ -6,7 +6,8 @@ import (
 
 func (m *Manager) createRoom(roomName string) *Room {
 	room := &Room{
-		clients: make(map[string]*Client),
+		clients:  make(map[string]*Client),
+		roomName: roomName,
 	}
 	m.rooms[roomName] = room
 	fmt.Printf("Room %s created\n", roomName)

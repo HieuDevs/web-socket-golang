@@ -21,16 +21,10 @@ func NewManager() *Manager {
 func (m *Manager) Start() {
 	for {
 		select {
-		case client, ok := <-m.register:
-			if !ok {
-				continue
-			}
+		case client := <-m.register:
 			m.onClientRegister(client)
 
-		case client, ok := <-m.unregister:
-			if !ok {
-				continue
-			}
+		case client := <-m.unregister:
 			m.onClientUnregister(client)
 
 		case message, ok := <-m.broadcast:

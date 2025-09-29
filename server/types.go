@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"sync"
 	"time"
 
@@ -25,13 +26,14 @@ type Client struct {
 }
 
 type Message struct {
-	Room    string `json:"room"`
-	UserId  string `json:"userId"`
-	Content []byte `json:"content"`
+	Room    string          `json:"room"`
+	UserId  string          `json:"userId"`
+	Content json.RawMessage `json:"content"`
 }
 
 type Room struct {
-	clients map[string]*Client
+	clients  map[string]*Client
+	roomName string
 }
 
 type Manager struct {
